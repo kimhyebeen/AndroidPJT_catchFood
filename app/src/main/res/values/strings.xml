@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">캐치푸드</string>
+    <string name="title">MENU</string>
+    <string name="title2">Add Data</string>
+    <string name="title3">초기 데이터 세팅</string>
+    <string name="textView1">아래 이미지를 클릭하세요.</string>
+    <string name="textView2">LIST</string>
+    <string name="menu">menu name</string>
+    <string name="texthint">write here</string>
+    <string name="hint2">데이터를 세팅해주세요.</string>
+    <string name="settingButton">DATA SETTING</string>
+    <string name="addButton">ADD</string>
+    <string name="editButton">EDIT</string>
+    <string name="deleteButton">DELETE</string>
+</resources>
