@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     int cycle = 0;
     int n=0;
     double random;
-    boolean btncheck;
+    boolean btncheck=true;
 
     @Override
     protected void onResume() {
@@ -102,15 +102,32 @@ public class MainActivity extends AppCompatActivity {
         datasetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SetActivity.class);
                 if (!isdb()) { // db에 아무 내용 없으면,,
+                    Intent intent = new Intent(getApplicationContext(), InitActivity.class);
                     intent.putExtra("key", false);
+                    startActivity(intent);
                 } else { // db에 내용이 있을 경우,,
+                    Intent intent = new Intent(getApplicationContext(), SetActivity.class);
                     intent.putExtra("key", true);
+                    startActivity(intent);
                 }
-                startActivity(intent);
             }
         });
+    }
+
+    public void init() {
+        if (database != null) {
+            menu = new ArrayList<>();
+            Cursor cursor1 = dbHelper.selectAll(database);
+            Log.d("MainActivity", ""+cursor1.getCount());
+            for (int i=0;i<cursor1.getCount();i++) {
+                cursor1.moveToNext();
+                for (int j=0;j<cursor1.getInt(2);j++) menu.add(cursor1.getString(1));
+            }
+            /* 기존 string데이터 말고 가져온 데이터 random menu 보여주기 */
+            if (btncheck)
+                timerStart();
+        }
     }
 
     public void timerStart() {
@@ -131,32 +148,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
             timer = new Timer();
-            timer.schedule(timerTask, 0, 100);
+            timer.schedule(timerTask, 0, 80);
         } else {
             menuTextView.setText(R.string.hint2);
             btncheck = true;
-        }
-    }
-
-    public void showMessage() {
-        String[] donot = {"답정너!!!", "그만 눌러,,.,,,", "그만 누를 때 됐잖아.,,....", "그만.., 그만.......", "하, 이제 진짜 마지막이다???",
-        "진짜 이제 그만 누르면 안돼?", "그냥 추천해준거 먹지..??", "언제까지 누를거야?", "이러다가 밥 시간 다 지날듯ㅎㅎ", "ㅋㅋ아니ㅋㅋ 밥 안먹을거야??",
-        "ㅎ...그냥 아무거나 먹어..", "야야ㅑ 밥시간 길어? 그냥 먹지??", "그래그래 계에에에속 눌러라..", "도대체 무슨 답을 기다리는거야?", "진짜 답정너..."};
-        int rdm = (int) (Math.random() * donot.length);
-        Toast.makeText(getApplicationContext(), donot[rdm], Toast.LENGTH_SHORT).show();
-    }
-
-    public void init() {
-        if (database != null) {
-            menu = new ArrayList<>();
-            Cursor cursor1 = dbHelper.selectAll(database);
-            Log.d("MainActivity", ""+cursor1.getCount());
-            for (int i=0;i<cursor1.getCount();i++) {
-                cursor1.moveToNext();
-                for (int j=0;j<cursor1.getInt(2);j++) menu.add(cursor1.getString(1));
-            }
-            /* 기존 string데이터 말고 가져온 데이터 random menu 보여주기 */
-            timerStart();
         }
     }
 
@@ -165,5 +160,13 @@ public class MainActivity extends AppCompatActivity {
         int cnt = cursordb.getCount();
         if (cnt==0) return false;
         else return true;
+    }
+
+    public void showMessage() {
+        String[] donot = {"답정너!!!", "그만 눌러,,.,,,", "그만 누를 때 됐잖아.,,....", "그만.., 그만.......", "하, 이제 진짜 마지막이다???",
+                "진짜 이제 그만 누르면 안돼?", "그냥 추천해준거 먹지..??", "언제까지 누를거야?", "이러다가 밥 시간 다 지날듯ㅎㅎ", "ㅋㅋ아니ㅋㅋ 밥 안먹을거야??",
+                "ㅎ...그냥 아무거나 먹어..", "야야ㅑ 밥시간 길어? 그냥 먹지??", "그래그래 계에에에속 눌러라..", "도대체 무슨 답을 기다리는거야?", "진짜 답정너..."};
+        int rdm = (int) (Math.random() * donot.length);
+        Toast.makeText(getApplicationContext(), donot[rdm], Toast.LENGTH_SHORT).show();
     }
 }

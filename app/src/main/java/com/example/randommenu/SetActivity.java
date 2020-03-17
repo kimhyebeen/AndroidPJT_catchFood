@@ -3,43 +3,86 @@ package com.example.randommenu;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RatingBar;
+import android.widget.Toast;
 
 public class SetActivity extends AppCompatActivity {
+    EditText editText;
+    RatingBar ratingBar2;
+    RecyclerView recyclerView1;
+
+    DBHelper dbHelper = DBHelper.getDbHelper();
+    SQLiteDatabase database = dbHelper.getWritableDatabase();
+    ContentValues values;
+    ListAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set);
-        /* 데이터베이스가 비어있는지 MainActivity에서 받아오기 */
-        Intent intent = getIntent();
-        boolean check = intent.getBooleanExtra("key",true);
 
         ActionBar actionBar = getSupportActionBar();
-        SetFragment1 fragment1 = new SetFragment1();
-        SetFragment2 fragment2 = new SetFragment2();
+        actionBar.setTitle("데이터 세팅");
 
-        /* 데이터베이스가 비어있으면 fragment2를, 비어있지 않으면 fragment1을 containerF에 붙여줘요 */
-        if (!check) {
-            actionBar.setTitle("데이터 세팅");
-            getSupportFragmentManager().beginTransaction().replace(R.id.containerF, fragment2).addToBackStack(null).commit();
-        } else {
-            actionBar.setTitle("데이터 추가");
-            getSupportFragmentManager().beginTransaction().replace(R.id.containerF, fragment1).addToBackStack(null).commit();
+        editText = findViewById(R.id.editText);
+        ratingBar2 = findViewById(R.id.ratingBar2);
+        recyclerView1 = findViewById(R.id.recyclerView1);
+
+        /* recyclerView1 세팅 */
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getApplicationContext());
+        recyclerView1.setLayoutManager(linearLayoutManager1);
+        listAdapter = new ListAdapter();
+        recyclerView1.setAdapter(listAdapter);
+
+        if (database!=null) {
+            Cursor cursor1 = dbHelper.selectAll(database);
+            for (int i=0;i<cursor1.getCount();i++) {
+                cursor1.moveToNext();
+                listAdapter.addItem(cursor1.getString(1), cursor1.getInt(2));
+            }
+            cursor1.close();
+            listAdapter.notifyDataSetChanged();
         }
-    }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        /* todo - BackPressed 문제 해결하기!! */
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        int backStackCount = fragmentManager.getBackStackEntryCount();
-        Log.d("SetActivity", "BackStackCount : "+backStackCount);
-        if(1 < backStackCount) fragmentManager.popBackStack();
-        else finish();
+        /* add 버튼 활성화 */
+        Button addButton = findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /* 버튼을 누르면 데이터베이스에 저장 */
+                String food = editText.getText().toString();
+                int prefer = (int) ratingBar2.getRating();
+
+                String sql = "SELECT * FROM menu WHERE food=\'"+food+"\'";
+                Cursor cursor = database.rawQuery(sql, null);
+                if (cursor.getCount()>0) {
+                    Toast.makeText(getApplicationContext(), "이미 존재합니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    values = new ContentValues();
+                    values.put("food", food);
+                    values.put("prefer", prefer);
+                    dbHelper.insertToTable(database, values);
+
+                    /* recyclerView1에 추가 */
+                    editText.setText("");
+                    ratingBar2.setNumStars(5);
+                    ratingBar2.setRating(3);
+                    listAdapter.addItem(food, prefer);
+                    listAdapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 }

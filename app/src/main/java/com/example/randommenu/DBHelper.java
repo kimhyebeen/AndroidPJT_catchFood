@@ -37,6 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void deleteTable(SQLiteDatabase db, String food) {
+        Log.d(TAG, "delete data in table");
         db.delete("menu", "food = \'"+food+"\'", null);
     }
 
