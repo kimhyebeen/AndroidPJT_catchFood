@@ -8,6 +8,8 @@ Not sure what to eat this time? If so, use this application. The application sel
 
 기술 스택 : Android Studio, Java, Database, SQLite
 
+2020.03.17 구글스토어 출시
+
 ## Application Information
 
 Database table :
