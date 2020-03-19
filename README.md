@@ -14,7 +14,8 @@ Not sure what to eat this time? If so, use this application. The application sel
 
 화면 구성 및 동작 :
 
-<image src="./images/screen1.png" />
+<image src="./images/screen1.png" width=700 />
+<image src="./images/screen2.png" width=700 />
 
 Database table :
 
