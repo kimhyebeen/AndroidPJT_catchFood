@@ -10,11 +10,11 @@ Not sure what to eat this time? If so, use this application. The application sel
 
 2020.03.17 구글스토어 출시 대기 중
 
-## Screen
-
-<image src="./image/screen1.png" />
-
 ## Application Information
+
+화면 구성 및 동작 :
+
+<image src="./images/screen1.png" />
 
 Database table :
 
