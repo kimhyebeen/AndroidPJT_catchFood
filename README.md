@@ -9,6 +9,7 @@ Not sure what to eat this time? If so, use this application. The application sel
 기술 스택 : Android Studio, Java, Database, SQLite
 
 2020.03.17 구글 플레이 스토어 출시
+https://play.google.com/store/apps/details?id=com.andpjt.catchfood
 
 ## Application Information
 
