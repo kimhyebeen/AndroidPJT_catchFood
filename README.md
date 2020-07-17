@@ -1,4 +1,4 @@
-# AndroidPJT_catchFood
+# Android_catchFood
 
 Not sure what to eat this time? If so, use this application. The application selects the menu for you.
 
