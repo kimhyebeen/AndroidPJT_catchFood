@@ -1,3 +1,6 @@
+![language](https://img.shields.io/badge/language-Java-green)
+![database](https://img.shields.io/badge/database-SQLite-d9fff8)
+
 # Android_catchFood
 
 Not sure what to eat this time? If so, use this application. The application selects the menu for you.
