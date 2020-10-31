@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">캐치푸드</string>
+    <string name="title">MENU</string>
+    <string name="title2">Add Data</string>
+    <string name="title3">초기 데이터 세팅</string>
+    <string name="textView1">아래 이미지를 클릭하세요.</string>
+    <string name="textView2">LIST</string>
+    <string name="menu">menu name</string>
+    <string name="texthint">write here</string>
+    <string name="hint2">데이터를 세팅해주세요.</string>
+    <string name="settingButton">DATA SETTING</string>
+    <string name="addButton">ADD</string>
+    <string name="editButton">EDIT</string>
+    <string name="deleteButton">DELETE</string>
+    <string name="cleanButton">초기화</string>
+    <string name="help">..도움말..</string>
+    <string name="finish">나가기</string>
+    <string name="helptxt1">1. Data Setting 버튼을 누르면 초기에 설정할 수 있는 메뉴 목록들을 보여줍니다.</string>
+    <string name="helptxt2">메뉴를 선택하고 Add를 누르면 초기 메뉴 데이터가 생성됩니다.</string>
+    <string name="helptxt3">2. 또 다시 Data Setting 버튼을 누르면 가지고 있는 메뉴 데이터들을 볼 수 있습니다.</string>
+    <string name="helptxt4">데이터의 호감도(별 개수)와 메뉴 이름을 수정/삭제 할 수 있고, 원하는 메뉴를 추가 할 수도 있습니다.</string>
+    <string name="helptxt5">3. 데이터의 호감도(별 개수)에 따라 메뉴 선택 비율이 달라지니 참고해주세요!!!</string>
+</resources>

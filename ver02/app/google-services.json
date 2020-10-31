@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "572541877330",
+    "firebase_url": "https://catchfood-510db.firebaseio.com",
+    "project_id": "catchfood-510db",
+    "storage_bucket": "catchfood-510db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:572541877330:android:82d9ef7be20065e025b38b",
+        "android_client_info": {
+          "package_name": "com.andpjt.catchfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "572541877330-is2ql7hjuptd9hqa3bngqg2esne8s4tg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH7TjeeO_zm2BXIaIDtUvaEsZnxSf4fwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "572541877330-is2ql7hjuptd9hqa3bngqg2esne8s4tg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-5632859719839583~6620488051"
+    }
+  ],
+  "configuration_version": "1"
+}
