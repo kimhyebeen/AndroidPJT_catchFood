@@ -34,9 +34,6 @@ public class InitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("초기 데이터 세팅");
-
         menuList0 = findViewById(R.id.menuList0);
         menuList1 = findViewById(R.id.menuList1);
         menuList2 = findViewById(R.id.menuList2);

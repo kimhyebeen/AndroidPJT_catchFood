@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         menuTextView = findViewById(R.id.menuTextView);
         preMenuText = findViewById(R.id.preMenuText);
         helpText = findViewById(R.id.helpText);
-        Button datasetButton = findViewById(R.id.datasetButton);
+        ImageView datasetButton = findViewById(R.id.datasetButton);
 
         /* 데이터베이스 세팅 */
         if (database == null) {

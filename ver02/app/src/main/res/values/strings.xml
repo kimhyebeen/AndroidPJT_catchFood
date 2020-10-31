@@ -3,7 +3,7 @@
     <string name="title">MENU</string>
     <string name="title2">Add Data</string>
     <string name="title3">초기 데이터 세팅</string>
-    <string name="textView1">아래 이미지를 클릭하세요.</string>
+    <string name="textView1">click</string>
     <string name="textView2">LIST</string>
     <string name="menu">menu name</string>
     <string name="texthint">write here</string>
