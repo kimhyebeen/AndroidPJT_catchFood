@@ -13,7 +13,7 @@
     <string name="editButton">EDIT</string>
     <string name="deleteButton">DELETE</string>
     <string name="cleanButton">초기화</string>
-    <string name="help">..도움말..</string>
+    <string name="help">도움말</string>
     <string name="finish">나가기</string>
     <string name="helptxt1">1. Data Setting 버튼을 누르면 초기에 설정할 수 있는 메뉴 목록들을 보여줍니다.</string>
     <string name="helptxt2">메뉴를 선택하고 Add를 누르면 초기 메뉴 데이터가 생성됩니다.</string>
