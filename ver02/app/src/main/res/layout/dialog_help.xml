@@ -22,48 +22,51 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/helptxt1" />
+            android:text="@string/helptxt1"
+            android:textColor="@color/brownishGrey" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/helptxt2" />
+            android:text="@string/helptxt2"
+            android:textColor="@color/brownishGrey" />
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/helptxt3" />
+            android:text="@string/helptxt3"
+            android:textColor="@color/brownishGrey" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:text="@string/helptxt4" />
+            android:layout_marginTop="8dp"
+            android:text="@string/helptxt4"
+            android:textColor="@color/brownishGrey" />
 
         <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/helptxt5"
-            android:textColor="#E91E63" />
+            android:textColor="@color/cornFlowerBlue" />
     </LinearLayout>
 
     <Button
         android:id="@+id/outButton"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:background="#ffffffff"
         android:text="@string/finish"
-        android:textColor="#673AB7"
+        android:textColor="@color/darkGrey"
         android:textSize="17sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

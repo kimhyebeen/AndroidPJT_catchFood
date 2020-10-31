@@ -13,11 +13,11 @@
     <string name="editButton">EDIT</string>
     <string name="deleteButton">DELETE</string>
     <string name="cleanButton">초기화</string>
-    <string name="help">도움말</string>
-    <string name="finish">나가기</string>
-    <string name="helptxt1">1. Data Setting 버튼을 누르면 초기에 설정할 수 있는 메뉴 목록들을 보여줍니다.</string>
-    <string name="helptxt2">메뉴를 선택하고 Add를 누르면 초기 메뉴 데이터가 생성됩니다.</string>
-    <string name="helptxt3">2. 또 다시 Data Setting 버튼을 누르면 가지고 있는 메뉴 데이터들을 볼 수 있습니다.</string>
-    <string name="helptxt4">데이터의 호감도(별 개수)와 메뉴 이름을 수정/삭제 할 수 있고, 원하는 메뉴를 추가 할 수도 있습니다.</string>
-    <string name="helptxt5">3. 데이터의 호감도(별 개수)에 따라 메뉴 선택 비율이 달라지니 참고해주세요!!!</string>
+    <string name="help">HELP</string>
+    <string name="finish">exit</string>
+    <string name="helptxt1">> Setting 이미지 버튼을 누르면 초기에 설정할 수 있는 메뉴 목록들을 보여줍니다.</string>
+    <string name="helptxt2">> 메뉴를 선택하고 Add를 누르면 초기 메뉴 데이터가 생성됩니다.</string>
+    <string name="helptxt3">> 또 다시 Setting 이미지 버튼을 누르면, 가지고 있는 메뉴 데이터들을 볼 수 있습니다.</string>
+    <string name="helptxt4">> 데이터의 호감도(별 개수)와 메뉴 이름을 수정/삭제 할 수 있고, 원하는 메뉴를 추가 할 수도 있습니다.</string>
+    <string name="helptxt5">> 데이터의 호감도(별 개수)에 따라 메뉴 선택 비율이 달라지니 참고해주세요!!!</string>
 </resources>
