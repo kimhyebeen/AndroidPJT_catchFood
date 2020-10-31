@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#F9F3FF"
+    android:background="@color/brownishGrey"
     android:paddingLeft="20dp"
     android:paddingTop="10dp"
     android:paddingRight="20dp"
@@ -14,9 +14,12 @@
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/lightPink"
         android:ems="10"
         android:hint="@string/texthint"
         android:inputType="textPersonName"
+        android:textColor="@color/lightPink"
+        android:textColorHint="@color/darkGrey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,6 +33,7 @@
         android:numStars="5"
         android:rating="3"
         android:stepSize="1"
+        android:theme="@style/RatingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2" />
@@ -46,17 +50,19 @@
         <Button
             android:id="@+id/editButton2"
             android:layout_width="70dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/btn_dialog"
-            android:text="@string/editButton" />
+            android:text="@string/editButton"
+            android:textColor="@color/colorPrimary" />
 
         <Button
             android:id="@+id/deleteButton"
             android:layout_width="70dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:background="@drawable/btn_dialog"
-            android:text="@string/deleteButton" />
+            android:text="@string/deleteButton"
+            android:textColor="@color/coral" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
