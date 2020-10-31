@@ -1,5 +1,6 @@
 ![language](https://img.shields.io/badge/language-Java-green)
 ![database](https://img.shields.io/badge/database-SQLite-d9fff8)
+![version](https://img.shields.io/badge/ver-1.0.8-e4ff4d)
 
 # Android_catchFood
 
