@@ -30,9 +30,6 @@ public class SetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("데이터 세팅");
-
         editText = findViewById(R.id.editText);
         ratingBar2 = findViewById(R.id.ratingBar2);
         recyclerView1 = findViewById(R.id.recyclerView1);

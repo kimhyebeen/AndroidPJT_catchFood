@@ -61,7 +61,8 @@ public class InitActivity extends AppCompatActivity {
         for (int i=0;i<27;i++) {
             btn = new Button(getApplicationContext());
             btn.setText(foo[i]);
-            btn.setTextSize(12);
+            btn.setTextSize(16);
+            btn.setTextColor(getColor(R.color.darkGrey));
             btn.setLayoutParams(params);
             btn.setId(i);
             btn.setBackgroundResource(R.drawable.btn_unclick);

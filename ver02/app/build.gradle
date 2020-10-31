@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.andpjt.catchfood"
-        minSdkVersion 16
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 9
         versionName "1.0.8"
