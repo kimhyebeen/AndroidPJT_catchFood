@@ -38,3 +38,5 @@ Database table :
 * `Android Studio`
 * (언어) `Java`
 * (데이터베이스) `SQLite`
+
+<image src="./images/ver01-screen1.png" width=900 />
