@@ -11,9 +11,13 @@ Not sure what to eat this time? If so, use this application. The application sel
 https://play.google.com/store/apps/details?id=com.andpjt.catchfood
 
 ## History
-기획 및 개발 (2020.03.13 ~ 2020.03.17)
-리팩토링 - 전체 UI 디자인 및 색상 변경 (2020.10.31)
-리팩토링 - Java파일을 Kotlin파일로 언어 변경 (2020.11.11)
+1. 기획 및 개발 (2020.03.13 ~ 2020.03.17)
+2. 리팩토링 (2020.10.31)
+  * 전체 UI 디자인 및 색상 변경
+3. 리팩토링 (2020.11.11~)
+  * Java파일을 Kotlin파일로 언어 변경
+  * 데이터바인딩 적용
+  * deprecated된 메서드 수정
 
 ## Application Information
 
