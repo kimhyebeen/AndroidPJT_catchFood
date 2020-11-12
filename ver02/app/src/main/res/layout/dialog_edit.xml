@@ -11,7 +11,7 @@
     android:paddingBottom="10dp">
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/dialog_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/lightPink"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RatingBar
-        android:id="@+id/ratingBar3"
+        android:id="@+id/dialog_rating_bar"
         style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         android:theme="@style/RatingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/dialog_edit_text" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -45,10 +45,10 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar3">
+        app:layout_constraintTop_toBottomOf="@+id/dialog_rating_bar">
 
         <Button
-            android:id="@+id/editButton2"
+            android:id="@+id/dialog_edit_button"
             android:layout_width="70dp"
             android:layout_height="48dp"
             android:layout_marginRight="20dp"
@@ -57,7 +57,7 @@
             android:textColor="@color/colorPrimary" />
 
         <Button
-            android:id="@+id/deleteButton"
+            android:id="@+id/dialog_delete_button"
             android:layout_width="70dp"
             android:layout_height="48dp"
             android:background="@drawable/btn_dialog"
