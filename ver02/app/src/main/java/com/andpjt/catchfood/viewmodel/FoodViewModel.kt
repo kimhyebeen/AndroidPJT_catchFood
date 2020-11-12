@@ -31,7 +31,7 @@ class FoodViewModel(
 
     fun initialize() {
         _isMenuButtonClicked.value = false
-        _clickedCount.value = 0
+        _clickedCount.value = -1
         _menuText.value = "데이터를 세팅해주세요."
         _preText.value = ""
     }

@@ -8,6 +8,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -24,18 +25,16 @@ import java.util.*
 
 class MainActivity: AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private var cycle: Int = 0
-    private var random: Double = 0.0
+    private lateinit var vm: FoodViewModel
+    private var cycle: Int = -1
+    private var foodCount: Int = 0
     private var isClickedMenuButton: Boolean = false
 
     private lateinit var timer: Timer
     private lateinit var timerTask: TimerTask
-    private lateinit var vm: FoodViewModel
-    private var foodCount: Int = 0
+    private lateinit var dialog: AlertDialog
 
     private val handler = Handler()
-    private lateinit var dialog: AlertDialog
-    private lateinit var builder: AlertDialog.Builder
     private var menu = ArrayList<String>()
 
     @SuppressLint("SetTextI18n")
@@ -43,77 +42,47 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        vm = ViewModelProvider(this, FoodViewModelFactory(application))
-                .get(FoodViewModel::class.java)
         setBinding()
         setMobileAds()
         observeFoodData()
 
         if (!isNetworkAvailable(applicationContext)) showToast("인터넷을 연결해주세요.")
 
-        binding.menuButton.setOnClickListener {
-            if (foodCount == 0) showToast("데이터를 세팅해주세요.")
-            else {
-                if (isClickedMenuButton) {
-                    timerTask.cancel()
-                    timer.cancel()
-                    timer.purge()
-                    vm.changeMenuButton(false)
-                    /* 이전에 나왔던 menu 보여주기 (최대 3개) */
-                    vm.addPreText()
-                    if (cycle == 2) showMessage()
-                } else {
-                    timerStart()
-                    vm.changeMenuButton(true)
-                }
-            }
-        }
-
-        /* data setting 버튼 활성화 */
-        binding.datasetButton.setOnClickListener {
-            val settingIntent: Intent =
-                if (foodCount == 0) Intent(applicationContext, InitActivity::class.java)
-                else Intent(applicationContext, SetActivity::class.java)
-            startActivity(settingIntent)
-        }
-
-        /* help 버튼 활성화 */
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_help, null, false)
-        builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this)
         builder.setView(dialogView)
         dialog = builder.create()
         dialogView.outButton.setOnClickListener { dialog.dismiss() }
+    }
 
-        binding.helpText.setOnClickListener { dialog.show() }
+    private fun setBinding() {
+        vm = ViewModelProvider(this, FoodViewModelFactory(application))
+                .get(FoodViewModel::class.java)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.lifecycleOwner = this@MainActivity
+        binding.setVariable(BR.main, this)
+        binding.setVariable(BR.vm, vm)
+    }
+
+    private fun setMobileAds() {
+        MobileAds.initialize(this)
+        binding.adView.loadAd( AdRequest.Builder().build() )
     }
 
     private fun observeFoodData() {
         vm.getAll().observe(this, { list ->
             foodCount = list.size
             menu.clear()
-            list.map {
-                for (i in 1..it.prefer) menu.add(it.food)
+            if (foodCount == 0) {
+                vm.initialize()
+            } else {
+                vm.changeMenuText("버튼을 눌러주세요")
+                list.map { for (i in 1..it.prefer) menu.add(it.food) }
             }
         })
-        vm.isMenuButtonClicked.observe(this, {
-            isClickedMenuButton = !isClickedMenuButton
-        })
-        vm.clickedCount.observe(this, {
-            cycle = it
-        })
-    }
-
-    private fun setBinding() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.lifecycleOwner = this@MainActivity
-        binding.setVariable(BR.vm, vm)
-    }
-
-    private fun setMobileAds() {
-        MobileAds.initialize(this)
-        binding.adView.loadAd(
-                AdRequest.Builder().build()
-        )
+        vm.isMenuButtonClicked.observe(this, { isClickedMenuButton = it })
+        vm.clickedCount.observe(this, { cycle = it })
     }
 
     // TODO("네트워크 연결 확인 부분을 NetworkCallback을 사용해서 바꾸기")
@@ -133,8 +102,8 @@ class MainActivity: AppCompatActivity() {
             timerTask = object : TimerTask() {
                 override fun run() {
                     val runnable = Runnable {
-                        random = Math.random() * menu.size
-                        vm.changeMenuText(menu.get(random.toInt()))
+                        val random = Math.random() * menu.size
+                        vm.changeMenuText(menu[random.toInt()])
                     }
                     handler.post(runnable)
                 }
@@ -143,6 +112,18 @@ class MainActivity: AppCompatActivity() {
             timer.schedule(timerTask, 0, 80)
         } else {
             vm.changeMenuText("데이터를 세팅해주세요.")
+            vm.changeMenuButton(false)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (isClickedMenuButton) {
+            timerTask.cancel()
+            timer.apply {
+                cancel()
+                purge()
+            }
             vm.changeMenuButton(false)
         }
     }
@@ -168,19 +149,37 @@ class MainActivity: AppCompatActivity() {
         showToast(alert[rdm])
     }
 
-    override fun onPause() {
-        super.onPause()
-        if (isClickedMenuButton) {
-            timerTask.cancel()
-            timer.apply {
-                cancel()
-                purge()
+    private fun showToast(str: String) {
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+    }
+
+    fun clickMenuButton(view: View) {
+        if (foodCount == 0) showToast("데이터를 세팅해주세요.")
+        else {
+            if (isClickedMenuButton) {
+                timerTask.cancel()
+                timer.cancel()
+                timer.purge()
+                vm.changeMenuButton(false)
+                /* 이전에 나왔던 menu 보여주기 (최대 3개) */
+                vm.addPreText()
+                if (cycle == 2) showMessage()
+            } else {
+                timerStart()
+                vm.changeMenuButton(true)
             }
-            vm.changeMenuButton(false)
+            vm.addCount()
         }
     }
 
-    private fun showToast(str: String) {
-        Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+    fun clickDataSetButton(view: View) {
+        val settingIntent: Intent =
+                if (foodCount == 0) Intent(applicationContext, InitActivity::class.java)
+                else Intent(applicationContext, SetActivity::class.java)
+        startActivity(settingIntent)
+    }
+
+    fun clickHelpButton(view: View) {
+        dialog.show()
     }
 }

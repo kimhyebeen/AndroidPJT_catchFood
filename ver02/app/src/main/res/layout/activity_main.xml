@@ -4,6 +4,10 @@
     <data>
 
         <variable
+            name="main"
+            type="com.andpjt.catchfood.activity.MainActivity" />
+
+        <variable
             name="vm"
             type="com.andpjt.catchfood.viewmodel.FoodViewModel" />
 
@@ -46,6 +50,7 @@
             android:layout_marginBottom="20dp"
             android:contentDescription="@string/menu"
             android:padding="10dp"
+            android:onClick="@{main::clickMenuButton}"
             app:layout_constraintBottom_toTopOf="@+id/menuTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,6 +97,7 @@
             android:textColor="@color/lightPink"
             android:textSize="17sp"
             android:textStyle="bold"
+            android:onClick="@{main::clickHelpButton}"
             app:layout_constraintBottom_toTopOf="@+id/adView"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -116,6 +122,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="80dp"
             android:padding="10dp"
+            android:onClick="@{main::clickDataSetButton}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
