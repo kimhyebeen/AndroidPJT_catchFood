@@ -19,4 +19,7 @@ class FoodRepository(application: Application) {
         return foodDao.delete(food)
     }
 
+    fun deleteAll() {
+        return foodDao.deleteAll()
+    }
 }

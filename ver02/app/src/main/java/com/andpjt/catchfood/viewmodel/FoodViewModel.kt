@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.andpjt.catchfood.model.Food
 import com.andpjt.catchfood.model.FoodRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FoodViewModel(
@@ -20,10 +21,7 @@ class FoodViewModel(
     private val _preText = MutableLiveData<String>()
 
     init {
-        _isMenuButtonClicked.value = true
-        _clickedCount.value = 0
-        _menuText.value = "데이터를 세팅해주세요."
-        _preText.value = ""
+        initialize()
     }
 
     val isMenuButtonClicked: LiveData<Boolean> get() = _isMenuButtonClicked
@@ -31,8 +29,14 @@ class FoodViewModel(
     val menuText: LiveData<String> get() = _menuText
     val preText: LiveData<String> get() = _preText
 
-    fun clickMenuButton(view: View) {
-        _isMenuButtonClicked.value = _isMenuButtonClicked.value?.let { !it }
+    fun initialize() {
+        _isMenuButtonClicked.value = false
+        _clickedCount.value = 0
+        _menuText.value = "데이터를 세팅해주세요."
+        _preText.value = ""
+    }
+
+    fun addCount() {
         _clickedCount.value = _clickedCount.value?.let { (it+1) % 3 }
     }
 
@@ -45,7 +49,7 @@ class FoodViewModel(
     }
 
     fun addPreText() {
-        if (_clickedCount.value == 0) _preText.value = ""
+        if (_clickedCount.value == 2) _preText.value = ""
         _preText.value = _preText.value?.let {
             "${_menuText.value}\n${it}"
         }
@@ -56,14 +60,20 @@ class FoodViewModel(
     }
 
     fun insert(food: Food) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.insert(food)
         }
     }
 
     fun delete(food: Food) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.delete(food)
+        }
+    }
+
+    fun deleteAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAll()
         }
     }
 }
