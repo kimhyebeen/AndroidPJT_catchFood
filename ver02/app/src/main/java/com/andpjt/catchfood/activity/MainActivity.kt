@@ -8,7 +8,10 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
+<<<<<<< HEAD
 import android.view.View
+=======
+>>>>>>> master
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -25,16 +28,30 @@ import java.util.*
 
 class MainActivity: AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+<<<<<<< HEAD
     private lateinit var vm: FoodViewModel
     private var cycle: Int = -1
     private var foodCount: Int = 0
+=======
+    private var cycle: Int = 0
+    private var random: Double = 0.0
+>>>>>>> master
     private var isClickedMenuButton: Boolean = false
 
     private lateinit var timer: Timer
     private lateinit var timerTask: TimerTask
+<<<<<<< HEAD
     private lateinit var dialog: AlertDialog
 
     private val handler = Handler()
+=======
+    private lateinit var vm: FoodViewModel
+    private var foodCount: Int = 0
+
+    private val handler = Handler()
+    private lateinit var dialog: AlertDialog
+    private lateinit var builder: AlertDialog.Builder
+>>>>>>> master
     private var menu = ArrayList<String>()
 
     @SuppressLint("SetTextI18n")
@@ -42,12 +59,18 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+<<<<<<< HEAD
+=======
+        vm = ViewModelProvider(this, FoodViewModelFactory(application))
+                .get(FoodViewModel::class.java)
+>>>>>>> master
         setBinding()
         setMobileAds()
         observeFoodData()
 
         if (!isNetworkAvailable(applicationContext)) showToast("인터넷을 연결해주세요.")
 
+<<<<<<< HEAD
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_help, null, false)
         val builder = AlertDialog.Builder(this)
         builder.setView(dialogView)
@@ -62,11 +85,69 @@ class MainActivity: AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this@MainActivity
         binding.setVariable(BR.main, this)
+=======
+        binding.menuButton.setOnClickListener {
+            if (foodCount == 0) showToast("데이터를 세팅해주세요.")
+            else {
+                if (isClickedMenuButton) {
+                    timerTask.cancel()
+                    timer.cancel()
+                    timer.purge()
+                    vm.changeMenuButton(false)
+                    /* 이전에 나왔던 menu 보여주기 (최대 3개) */
+                    vm.addPreText()
+                    if (cycle == 2) showMessage()
+                } else {
+                    timerStart()
+                    vm.changeMenuButton(true)
+                }
+            }
+        }
+
+        /* data setting 버튼 활성화 */
+        binding.datasetButton.setOnClickListener {
+            val settingIntent: Intent =
+                if (foodCount == 0) Intent(applicationContext, InitActivity::class.java)
+                else Intent(applicationContext, SetActivity::class.java)
+            startActivity(settingIntent)
+        }
+
+        /* help 버튼 활성화 */
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_help, null, false)
+        builder = AlertDialog.Builder(this)
+        builder.setView(dialogView)
+        dialog = builder.create()
+        dialogView.outButton.setOnClickListener { dialog.dismiss() }
+
+        binding.helpText.setOnClickListener { dialog.show() }
+    }
+
+    private fun observeFoodData() {
+        vm.getAll().observe(this, { list ->
+            foodCount = list.size
+            menu.clear()
+            list.map {
+                for (i in 1..it.prefer) menu.add(it.food)
+            }
+        })
+        vm.isMenuButtonClicked.observe(this, {
+            isClickedMenuButton = !isClickedMenuButton
+        })
+        vm.clickedCount.observe(this, {
+            cycle = it
+        })
+    }
+
+    private fun setBinding() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.lifecycleOwner = this@MainActivity
+>>>>>>> master
         binding.setVariable(BR.vm, vm)
     }
 
     private fun setMobileAds() {
         MobileAds.initialize(this)
+<<<<<<< HEAD
         binding.adView.loadAd( AdRequest.Builder().build() )
     }
 
@@ -83,6 +164,11 @@ class MainActivity: AppCompatActivity() {
         })
         vm.isMenuButtonClicked.observe(this, { isClickedMenuButton = it })
         vm.clickedCount.observe(this, { cycle = it })
+=======
+        binding.adView.loadAd(
+                AdRequest.Builder().build()
+        )
+>>>>>>> master
     }
 
     // TODO("네트워크 연결 확인 부분을 NetworkCallback을 사용해서 바꾸기")
@@ -102,8 +188,13 @@ class MainActivity: AppCompatActivity() {
             timerTask = object : TimerTask() {
                 override fun run() {
                     val runnable = Runnable {
+<<<<<<< HEAD
                         val random = Math.random() * menu.size
                         vm.changeMenuText(menu[random.toInt()])
+=======
+                        random = Math.random() * menu.size
+                        vm.changeMenuText(menu.get(random.toInt()))
+>>>>>>> master
                     }
                     handler.post(runnable)
                 }
@@ -116,6 +207,7 @@ class MainActivity: AppCompatActivity() {
         }
     }
 
+<<<<<<< HEAD
     override fun onPause() {
         super.onPause()
         if (isClickedMenuButton) {
@@ -128,6 +220,8 @@ class MainActivity: AppCompatActivity() {
         }
     }
 
+=======
+>>>>>>> master
     private fun showMessage() {
         val alert = arrayOf(
                 "답정너!!!", "그만 눌러,,.,,,",
@@ -149,6 +243,7 @@ class MainActivity: AppCompatActivity() {
         showToast(alert[rdm])
     }
 
+<<<<<<< HEAD
     private fun showToast(str: String) {
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
     }
@@ -181,5 +276,21 @@ class MainActivity: AppCompatActivity() {
 
     fun clickHelpButton(view: View) {
         dialog.show()
+=======
+    override fun onPause() {
+        super.onPause()
+        if (isClickedMenuButton) {
+            timerTask.cancel()
+            timer.apply {
+                cancel()
+                purge()
+            }
+            vm.changeMenuButton(false)
+        }
+    }
+
+    private fun showToast(str: String) {
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+>>>>>>> master
     }
 }
