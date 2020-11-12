@@ -20,8 +20,8 @@ class FoodViewModel(
     private val _menuText = MutableLiveData<String>()
     private val _preText = MutableLiveData<String>()
 
-    private val _settingEditText = MutableLiveData<String>()
-    private val _settingRatingCount = MutableLiveData<Int>()
+    val settingEditText = MutableLiveData<String>()
+    val settingRatingCount = MutableLiveData<Float>()
 
     init {
         initialize()
@@ -33,19 +33,16 @@ class FoodViewModel(
     val menuText: LiveData<String> get() = _menuText
     val preText: LiveData<String> get() = _preText
 
-    val settingEditText: LiveData<String> get() = _settingEditText
-    val settingRatingCount: LiveData<Int> get() = _settingRatingCount
-
     fun initialize() {
         _isMenuButtonClicked.value = false
-        _clickedCount.value = -1
+        _clickedCount.value = 0
         _menuText.value = "데이터를 세팅해주세요."
         _preText.value = ""
     }
 
     fun initSetting() {
-        _settingEditText.value = ""
-        _settingRatingCount.value = 3
+        settingEditText.value = ""
+        settingRatingCount.value = 3f
     }
 
     fun addCount() {

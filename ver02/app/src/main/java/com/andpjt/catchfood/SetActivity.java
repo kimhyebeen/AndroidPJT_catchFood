@@ -1,6 +1,5 @@
 package com.andpjt.catchfood;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,7 +31,7 @@ public class SetActivity extends AppCompatActivity {
 
         editText = findViewById(R.id.editText);
         ratingBar2 = findViewById(R.id.ratingBar2);
-        recyclerView1 = findViewById(R.id.recyclerView1);
+        recyclerView1 = findViewById(R.id.set_recycler_view);
 
         /* recyclerView1 세팅 */
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getApplicationContext());

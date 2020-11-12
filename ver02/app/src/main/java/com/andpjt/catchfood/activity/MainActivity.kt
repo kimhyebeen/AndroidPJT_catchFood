@@ -26,7 +26,7 @@ import java.util.*
 class MainActivity: AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var vm: FoodViewModel
-    private var cycle: Int = -1
+    private var cycle: Int = 0
     private var foodCount: Int = 0
     private var isClickedMenuButton: Boolean = false
 

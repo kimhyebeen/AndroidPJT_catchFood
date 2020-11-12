@@ -59,7 +59,7 @@
             android:layout_marginEnd="15dp"
             android:isIndicator="false"
             android:numStars="5"
-            android:rating="@{vm.settingRatingCount}"
+            android:rating="@={vm.settingRatingCount}"
             android:stepSize="1"
             android:theme="@style/RatingBar"
             app:layout_constraintEnd_toStartOf="@+id/addButton"
