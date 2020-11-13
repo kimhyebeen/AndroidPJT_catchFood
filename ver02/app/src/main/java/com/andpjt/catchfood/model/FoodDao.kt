@@ -8,6 +8,9 @@ interface FoodDao {
     @Query("SELECT * FROM foods")
     fun getAll(): LiveData<List<Food>>
 
+    @Query("SELECT * FROM foods WHERE food = :name")
+    fun getItem(name: String): LiveData<List<Food>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(food: Food)
 

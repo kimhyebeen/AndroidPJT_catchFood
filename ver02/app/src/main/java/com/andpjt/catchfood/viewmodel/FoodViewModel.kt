@@ -1,7 +1,6 @@
 package com.andpjt.catchfood.viewmodel
 
 import android.app.Application
-import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -66,6 +65,10 @@ class FoodViewModel(
 
     fun getAll(): LiveData<List<Food>> {
         return repository.getAll()
+    }
+
+    fun getItem(name: String): LiveData<List<Food>> {
+        return repository.getItem(name)
     }
 
     fun insert(food: Food) {

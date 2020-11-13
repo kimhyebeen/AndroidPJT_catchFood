@@ -11,6 +11,10 @@ class FoodRepository(application: Application) {
         return foodDao.getAll()
     }
 
+    fun getItem(name: String): LiveData<List<Food>> {
+        return foodDao.getItem(name)
+    }
+
     fun insert(food: Food) {
         return foodDao.insert(food)
     }

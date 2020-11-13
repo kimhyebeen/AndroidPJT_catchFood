@@ -3,6 +3,7 @@ package com.andpjt.catchfood.activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -22,6 +23,7 @@ class SettingActivity: AppCompatActivity() {
     private lateinit var editDialog: AlertDialog
     private lateinit var dialogView: View
     private lateinit var settingAdapter: SettingMenuRecyclerAdapter
+    private var isExist = false
 
     override fun onResume() {
         super.onResume()
@@ -65,6 +67,11 @@ class SettingActivity: AppCompatActivity() {
         vm.getAll().observe(this, {
             settingAdapter.setContents(it)
         })
+        vm.settingEditText.observe(this, { str ->
+            vm.getItem(str).observe(this, {
+                isExist = it.isNotEmpty()
+            })
+        })
     }
 
     private fun dialogEditButton(item: Food, str: String, value: Int) {
@@ -81,8 +88,11 @@ class SettingActivity: AppCompatActivity() {
 
     fun clickAddButton(view: View) {
         if (binding.editText.text.isNotEmpty()) {
-            vm.insert(Food(null, vm.settingEditText.value ?: "", vm.settingRatingCount.value?.toInt() ?: 3))
-            vm.initSetting()
+            if (isExist) Toast.makeText(this, "이미 메뉴가 존재합니다.", Toast.LENGTH_SHORT).show()
+            else {
+                vm.insert(Food(null, vm.settingEditText.value ?: "", vm.settingRatingCount.value?.toInt() ?: 3))
+                vm.initSetting()
+            }
         }
     }
 
