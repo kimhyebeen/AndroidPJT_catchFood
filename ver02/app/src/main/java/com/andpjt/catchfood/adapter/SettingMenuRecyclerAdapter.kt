@@ -26,10 +26,6 @@ class SettingMenuRecyclerAdapter(
             private var itemBinding: ItemSetListBinding
     ) : RecyclerView.ViewHolder(itemBinding.root) {
 
-        init {
-            dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_edit, null, false)
-        }
-
         fun onBind(item: Food, index: Int) {
             itemBinding.food = item
             itemBinding.root.editButton.setOnClickListener {
@@ -38,6 +34,7 @@ class SettingMenuRecyclerAdapter(
         }
 
         private fun startDialog(item: Food, idx: Int) {
+            dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_edit, null, false)
             builder = AlertDialog.Builder(context)
             builder.setView(dialogView)
             dialog = builder.create()
