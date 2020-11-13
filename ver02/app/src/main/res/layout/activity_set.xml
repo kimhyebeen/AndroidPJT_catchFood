@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,9 +15,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/darkBlack"
@@ -40,11 +40,13 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="15dp"
-            android:background="#FFFFFF"
+            android:background="@drawable/design_menutext"
             android:ems="10"
             android:hint="@string/texthint"
-            android:text="@={vm.settingEditText}"
             android:inputType="textPersonName"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:text="@={vm.settingEditText}"
             android:textColor="@color/darkGrey"
             app:layout_constraintEnd_toStartOf="@+id/addButton"
             app:layout_constraintStart_toStartOf="parent"
