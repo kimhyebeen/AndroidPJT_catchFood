@@ -49,9 +49,7 @@ class SettingActivity: AppCompatActivity() {
             setHasFixedSize(true)
         }
 
-        vm.getAll().observe(this, {
-            settingAdapter.setContents(it)
-        })
+        observeDatabase()
     }
 
     private fun setBinding() {
@@ -61,6 +59,12 @@ class SettingActivity: AppCompatActivity() {
         binding.lifecycleOwner = this@SettingActivity
         binding.setVariable(BR.setting, this)
         binding.setVariable(BR.vm, vm)
+    }
+
+    private fun observeDatabase() {
+        vm.getAll().observe(this, {
+            settingAdapter.setContents(it)
+        })
     }
 
     private fun dialogEditButton(item: Food, str: String, value: Int) {
