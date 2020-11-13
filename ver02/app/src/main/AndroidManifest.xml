@@ -17,13 +17,16 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-5632859719839583~6620488051"/>
 
-        <activity android:name="com.andpjt.catchfood.activity.MainActivity">
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.andpjt.catchfood.activity.MainActivity" />
+
         <activity android:name="com.andpjt.catchfood.activity.InitActivity"
             android:parentActivityName="com.andpjt.catchfood.activity.MainActivity" />
         <activity
