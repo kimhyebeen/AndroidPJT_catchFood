@@ -20,7 +20,8 @@ class SettingActivity: AppCompatActivity() {
     private lateinit var vm: FoodViewModel
     private lateinit var binding: ActivitySetBinding
     private lateinit var editDialog: AlertDialog
-    private val settingAdapter = SettingMenuRecyclerAdapter()
+    private lateinit var dialogView: View
+    private lateinit var settingAdapter: SettingMenuRecyclerAdapter
 
     override fun onResume() {
         super.onResume()
@@ -32,7 +33,15 @@ class SettingActivity: AppCompatActivity() {
         setContentView(R.layout.activity_set)
 
         setBinding()
-        setDialog()
+        dialogView = LayoutInflater.from(applicationContext).inflate(R.layout.dialog_edit, null, false)
+        val builder = AlertDialog.Builder(applicationContext)
+        builder.setView(dialogView)
+        editDialog = builder.create()
+
+        settingAdapter = SettingMenuRecyclerAdapter(
+                { food, str, i -> dialogEditButton(food, str, i) },
+                { food -> dialogDeleteButton(food) }
+        )
 
         binding.setRecyclerView.apply {
             adapter = settingAdapter
@@ -43,8 +52,6 @@ class SettingActivity: AppCompatActivity() {
         vm.getAll().observe(this, {
             settingAdapter.setContents(it)
         })
-
-        // TODO("setting의 edit dialog")
     }
 
     private fun setBinding() {
@@ -56,16 +63,23 @@ class SettingActivity: AppCompatActivity() {
         binding.setVariable(BR.vm, vm)
     }
 
-    private fun setDialog() {
-        val dialogView = LayoutInflater.from(applicationContext).inflate(R.layout.dialog_edit, null, false)
-        val builder = AlertDialog.Builder(applicationContext)
-        builder.setView(dialogView)
-        editDialog = builder.create()
+    private fun dialogEditButton(item: Food, str: String, value: Int) {
+        val updateFood = item.apply {
+            food = str
+            prefer = value
+        }
+        vm.insert(updateFood)
+    }
+
+    private fun dialogDeleteButton(item: Food) {
+        vm.delete(item)
     }
 
     fun clickAddButton(view: View) {
-        vm.insert(Food(null, vm.settingEditText.value ?: "", vm.settingRatingCount.value?.toInt() ?: 3))
-        vm.initSetting()
+        if (binding.editText.text.isNotEmpty()) {
+            vm.insert(Food(null, vm.settingEditText.value ?: "", vm.settingRatingCount.value?.toInt() ?: 3))
+            vm.initSetting()
+        }
     }
 
     fun clickCleanButton(view: View) {
